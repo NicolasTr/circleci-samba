@@ -7,6 +7,7 @@ machine:
 dependencies:
     override:
         - sudo pip install fig==1.0.0
+        - sudo docker pull svendowideit/samba:latest
         - sudo fig build
         - curl -o insecure_key -fSL https://github.com/phusion/baseimage-docker/raw/master/image/insecure_key
         - chmod 600 insecure_key
