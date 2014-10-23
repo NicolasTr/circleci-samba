@@ -1,0 +1,19 @@
+samba:
+    image: svendowideit/samba:latest
+    entrypoint: /bin/bash
+    command: -exc "touch /test_share_1/test_file && /setup.sh --start empty-parameter /test_share_1"
+    ports:
+        - "139"
+        - "445"
+    volumes:
+        - "/test_share_1"
+        
+tests:
+    build: .
+    command: /sbin/my_init --enable-insecure-key
+    ports:
+        - "2201:22"
+    links:
+        - samba
+    volumes_from:
+        - samba

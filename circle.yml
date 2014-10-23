@@ -1,0 +1,16 @@
+machine:
+    python:
+        version: 2.7.5
+    services:
+        - docker
+
+dependencies:
+    override:
+        - sudo pip install fig==1.0.0
+        - sudo fig build
+        - curl -o insecure_key -fSL https://github.com/phusion/baseimage-docker/raw/master/image/insecure_key
+        - chmod 600 insecure_key
+
+test:
+    override:
+        - ./test.sh
